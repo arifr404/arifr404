@@ -1,0 +1,7 @@
+Social brand icon paths: Simple Icons v11 (CC0-1.0). Brand trademarks belong to their respective owners.
+Sources:
+X: https://cdn.jsdelivr.net/npm/simple-icons@11/icons/x.svg
+LinkedIn: https://cdn.jsdelivr.net/npm/simple-icons@11/icons/linkedin.svg
+Threads: https://cdn.jsdelivr.net/npm/simple-icons@11/icons/threads.svg
+GitHub: https://cdn.jsdelivr.net/npm/simple-icons@11/icons/github.svg
+Email envelope, Web globe, and label layouts are project-local SVG artwork.
