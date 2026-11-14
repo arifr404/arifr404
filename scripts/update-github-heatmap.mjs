@@ -25,14 +25,15 @@ if (!response.ok) throw new Error(`Calendar fetch failed: HTTP ${response.status
 const svg = (await response.text()).trim();
 const root = svg.match(/^<svg\b[^>]*>/)?.[0];
 const dimensions = root?.match(/viewBox="0 0 (\d+) (\d+)"/);
-const cellCount = (svg.match(/class="contrib-cell"/g) ?? []).length;
+const cellCount = (svg.match(/class="contrib-cell[\s"]/g) ?? []).length;
 if (!dimensions || !svg.endsWith('</svg>') || cellCount < 300) {
   throw new Error('Unexpected calendar response; keeping the previous SVG.');
 }
 
 const [, width, height] = dimensions;
-const contents = svg.slice(root.length, -'</svg>'.length);
-const rounded = root.replace('>', ' role="img" aria-labelledby="calendar-title">') + `
+// Drop the service's own title and ARIA attributes so ours are the only ones
+const contents = svg.slice(root.length, -'</svg>'.length).replace(/<title\b[^>]*>[\s\S]*?<\/title>/, '');
+const rounded = root.replace(/\s(?:role|aria-labelledby)="[^"]*"/g, '').replace(/>$/, ' role="img" aria-labelledby="calendar-title">') + `
 <title id="calendar-title">arifr404's GitHub contribution calendar</title>
 <defs><clipPath id="calendar-card"><rect width="${width}" height="${height}" rx="6"/></clipPath></defs>
 <g clip-path="url(#calendar-card)">${contents}</g>
