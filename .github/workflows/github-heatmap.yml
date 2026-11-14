@@ -3,7 +3,8 @@ name: Update profile contribution calendar
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 */6 * * *'
+    # Daily at 00:17 Bangladesh time (18:17 UTC)
+    - cron: '17 18 * * *'
   push:
     paths:
       - scripts/update-github-heatmap.mjs
